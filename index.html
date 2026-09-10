@@ -82,7 +82,6 @@
       resultContainer.classList.add('hidden');
 
       try {
-        // 백엔드 서버리스 API 호출
         const response = await fetch('/api/analyze', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -90,7 +89,12 @@
         });
 
         const data = await response.json();
-        if (data.error) throw new Error(data.error);
+
+        // [OBJECT OBJECT] 대신 진짜 에러 메시지를 보여주는 부분
+        if (data.error) {
+          const errorMsg = typeof data.error === 'object' ? JSON.stringify(data.error) : data.error;
+          throw new Error(errorMsg);
+        }
 
         const rawMarkdown = data.candidates[0].content.parts[0].text;
         resultContent.innerHTML = marked.parse(rawMarkdown);
