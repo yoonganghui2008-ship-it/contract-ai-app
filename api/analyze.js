@@ -41,8 +41,8 @@ export default async function handler(req, res) {
 ### 🛡️ 4. AI 노무사의 최종 대처 조언`;
 
   try {
-    // 확실하게 gemini-2.0-flash 명시
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+    // 구글의 최신 정책에 맞춰 gemini-3.6-flash 모델로 완벽히 변경했습니다.
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
